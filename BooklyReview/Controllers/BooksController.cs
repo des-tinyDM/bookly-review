@@ -22,13 +22,13 @@ namespace BooklyReview.Controllers
         }
         public ViewResult Index()
         {
-            var books = _context.Books.ToList();
+            var books = _context.Books.Include(b => b.Genre).ToList();
             return View(books);
         }
 
         public ActionResult Details(int id)
         {
-            var book = _context.Books.SingleOrDefault(m => m.Id == id);
+            var book = _context.Books.Include(b => b.Genre).SingleOrDefault(m => m.Id == id);
             if (book == null)
                 return HttpNotFound();
             return View(book);
