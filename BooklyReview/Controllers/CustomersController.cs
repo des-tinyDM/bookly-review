@@ -25,9 +25,7 @@ namespace BooklyReview.Controllers
 
         public ViewResult Index()
         {
-            // Deferred execution until customers object is itterated over if no helper function is called (e.g. _context.Customers) 
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
+            return View();
         }
 
         public ActionResult Details(int id)
@@ -41,22 +39,32 @@ namespace BooklyReview.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            if (!ModelState.IsValid)
+            {
+
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+
             if (customer.Id == 0)
                 _context.Customers.Add(customer);
             else
             {
-
-                // AutoMapper could use Mapped.Map(customer, customerInDb)
+                //AutoMapper could use Mapped.Map(customer, customerInDb)
                 var customerInDb = _context.Customers.SingleOrDefault(c => c.Id == customer.Id);
 
                 customerInDb.Name = customer.Name;
                 customerInDb.Birthdate = customer.Birthdate;
                 customerInDb.MembershipTypeId = customer.MembershipTypeId;
                 customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
-
-
             }
             _context.SaveChanges();
 
@@ -79,13 +87,14 @@ namespace BooklyReview.Controllers
 
             return View("CustomerForm", viewModel);
         }
-        
+
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel
             {
-                MembershipTypes = membershipTypes
+                MembershipTypes = membershipTypes,
+                Customer = new Customer()
             };
 
             return View("CustomerForm", viewModel);
