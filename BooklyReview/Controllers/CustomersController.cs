@@ -9,6 +9,7 @@ using BooklyReview.ViewModels;
 
 namespace BooklyReview.Controllers
 {
+    
     public class CustomersController : Controller
 
     {
@@ -23,6 +24,7 @@ namespace BooklyReview.Controllers
             _context.Dispose(); 
         }
 
+        
         public ViewResult Index()
         {
             return View();

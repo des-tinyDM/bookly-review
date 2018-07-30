@@ -15,15 +15,17 @@ namespace BooklyReview.Models
         public Genre Genre { get; set; }
 
         [Required]
-        [Display(Name="Genre")]
+        [Display(Name = "Genre")]
         public byte GenreId { get; set; }
         [Required]
         public string Author { get; set; }
-        
+
         [Required]
-        [Display(Name="Release Date")]
+        [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
-        [Display(Name="Number in Stock")]
+        [Display(Name = "Number in Stock")]
         public byte NumberInStock { get; set; }
+        public byte NumberAvailable { get; set; }
+
     }
 }

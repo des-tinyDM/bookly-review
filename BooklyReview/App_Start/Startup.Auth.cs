@@ -54,9 +54,9 @@ namespace BooklyReview
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "2318042641760600",
+               appSecret: "2fe578084baa1807bf521c622844c8df");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
