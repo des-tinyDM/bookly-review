@@ -35,11 +35,14 @@ namespace BooklyReview.Controllers.Api
             var books = _context.Books.Where(
                 m => newRental.BookIds.Contains(m.Id)).ToList();
 
-            if (books.Count !=)
+            if (books.Count != newRental.BookIds.Count)
+                return BadRequest("One or more BookIds are invalid.");
+
             foreach (var book in books)
             {
                 if (book.NumberAvailable == 0)
                     return BadRequest("Book is not available.");
+
                 book.NumberAvailable--;
 
                 var rental = new Rental

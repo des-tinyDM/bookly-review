@@ -23,7 +23,7 @@ namespace BooklyReview.Migrations
                 .Index(t => t.Book_Id)
                 .Index(t => t.Customer_Id);
             
-            AddColumn("dbo.Books", "NumberAvailable", c => c.Byte(nullable: false));
+            
         }
         
         public override void Down()

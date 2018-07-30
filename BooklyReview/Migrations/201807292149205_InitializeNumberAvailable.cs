@@ -7,7 +7,6 @@ namespace BooklyReview.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Books", "NumberAvailable", c => c.Byte(nullable: false));
 
             Sql("UPDATE Books SET NumberAvailable = NumberInStock");
         }
